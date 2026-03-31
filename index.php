@@ -2,8 +2,10 @@
 
 include "../base/chech.php"; 
 include "../base/main.php";
-include "db.php"
+include "db.php";
+
 session_start(); 
+
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
@@ -126,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p><strong>Followers</strong> (<?php echo count($currentProfile['followers']); ?>):</p>
                 <ul>
                     <?php foreach ($currentProfile['followers'] as $follower): ?>
-                        <li><a href="profile_view.php?user=<?php echo urlencode($follower); ?>"><?php echo htmlspecialchars($profiles[$follower]['name']); ?></a></li>
+                        <li><a href="profile_view.php?user=<?php echo urlencode($follower); ?>"><?php echo htmlspecialchars($follower); ?></a></li>
                     <?php endforeach; ?>
                 </ul>
         
