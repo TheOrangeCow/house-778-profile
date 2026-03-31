@@ -26,7 +26,7 @@ $currentProfile = [
 ];
 
 
-$stmt = $mysqli->prepare("SELECT name, description, icon FROM profiles WHERE username = ?");
+$stmt = $conn->prepare("SELECT name, description, icon FROM profiles WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -37,7 +37,7 @@ if ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-$stmt = $mysqli->prepare("SELECT follower_username FROM followers WHERE username = ?");
+$stmt = $conn->prepare("SELECT follower_username FROM followers WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -46,7 +46,7 @@ while ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-$stmt = $mysqli->prepare("SELECT username FROM followers WHERE follower_username = ?");
+$stmt = $conn->prepare("SELECT username FROM followers WHERE follower_username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -61,18 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $description = $_POST['description'];
         $icon = $_POST['icon'];
 
-        $stmt = $mysqli->prepare("SELECT username FROM profiles WHERE username = ?");
+        $stmt = $conn->prepare("SELECT username FROM profiles WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $update = $mysqli->prepare("UPDATE profiles SET name = ?, description = ?, icon = ? WHERE username = ?");
+            $update = $conn->prepare("UPDATE profiles SET name = ?, description = ?, icon = ? WHERE username = ?");
             $update->bind_param("ssss", $name, $description, $icon, $username);
             $update->execute();
             $update->close();
         } else {
-            $insert = $mysqli->prepare("INSERT INTO profiles (username, name, description, icon) VALUES (?, ?, ?, ?)");
+            $insert = $conn->prepare("INSERT INTO profiles (username, name, description, icon) VALUES (?, ?, ?, ?)");
             $insert->bind_param("ssss", $username, $name, $description, $icon);
             $insert->execute();
             $insert->close();
