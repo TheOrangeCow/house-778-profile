@@ -17,7 +17,6 @@ if ($currentUser == $user) {
     header("Location: index.php");
     exit();
 }
-
 $stmt = $conn->prepare("SELECT username, name, description, icon FROM profiles WHERE username = ?");
 $stmt->bind_param("s", $user);
 $stmt->execute();
