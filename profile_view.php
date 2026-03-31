@@ -17,6 +17,7 @@ if ($currentUser == $user) {
     header("Location: index.php");
     exit();
 }
+
 $stmt = $conn->prepare("SELECT username, name, description, icon FROM profiles WHERE username = ?");
 $stmt->bind_param("s", $user);
 $stmt->execute();
@@ -109,8 +110,7 @@ $followingResult = $stmt->get_result();
                 <p><strong>Followers</strong> (<?php echo $followersResult->num_rows; ?>):</p>
                 <ul>
                 <?php while ($follower = $followersResult->fetch_assoc()): ?>
-                    <li><a href="profile_view.php?user=<?php echo urlencode($follower['username']); ?>"><?php echo htmlspecialchars($follower['name']); ?></a></li>
-                <?php endwhile; ?>
+                    <li><a href="profile_view.php?user=<?php echo urlencode($follower['username']); ?>"><?php echo htmlspecialchars($follower['name']); ?></a></li>                <?php endwhile; ?>
                 </ul>
                 
                 <p><strong>Following</strong> (<?php echo $followingResult->num_rows; ?>):</p>
