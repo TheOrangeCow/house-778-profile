@@ -11,7 +11,6 @@ $user = getenv('db_user');
 $pass = getenv('db_pass');
 $db = "profile";
 
-
 $conn=new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
