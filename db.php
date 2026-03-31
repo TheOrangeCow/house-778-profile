@@ -6,6 +6,7 @@ if (file_exists(__DIR__ . '/.env')) {
         putenv($line);
     }
 }
+
 $host = "127.0.0.1:3306";
 $user = getenv('db_user');
 $pass = getenv('db_pass');
