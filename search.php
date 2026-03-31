@@ -23,7 +23,6 @@ if ($searchQuery) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html>
     <head>
