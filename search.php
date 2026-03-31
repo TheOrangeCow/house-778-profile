@@ -1,7 +1,7 @@
 <?php
 include "../base/chech.php"; 
 include "../base/main.php";
-include "db.php"
+include "db.php";
 session_start();
 
 $searchQuery = $_GET['query'] ?? '';
